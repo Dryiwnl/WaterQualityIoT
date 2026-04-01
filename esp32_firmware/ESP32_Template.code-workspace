@@ -1,0 +1,31 @@
+{
+	"folders": [
+		{
+			"name": "ESP32_Template",
+			"path": "../../../../../Desktop/ESP32_Template"
+		},
+		{
+			"name": "Led_piscando",
+			"path": "../../Led_piscando"
+		},
+		{
+			"name": "Semaforo",
+			"path": "../../Semaforo"
+		},
+		{
+			"name": "Contador_Garrafa_Interrupt",
+			"path": "../../Contador_Garrafa_Interrupt"
+		},
+		{
+			"name": "Geladeira_Segura",
+			"path": "../../Geladeira_Segura"
+		},
+		{
+			"name": "WaterQualityIoT",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"FSharp.suggestGitignore": false
+	}
+}

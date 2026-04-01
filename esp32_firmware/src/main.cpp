@@ -1,18 +1,40 @@
 #include <Arduino.h>
-#define 
-// put function declarations here:
-int myFunction(int, int);
+#include <WiFi.h>
+#include "sensors.h"
+
+// Credenciais da rede Wi-Fi virtual do Wokwi
+const char* ssid = "Wokwi-GUEST";
+const char* password = "";
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  Serial.begin(115200);
+  
+  Serial.print("Conectando ao WiFi");
+  WiFi.begin(ssid, password);
+  
+  // Trava o código aqui até conectar
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  
+  Serial.println("\nWiFi conectado!");
+  Serial.println("IP: ");
+  Serial.println(WiFi.localIP());
+  Serial.println("Sistema Iniciado. Lendo sensores...");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
+  float valor_pH = lerPH();
+  float valor_turbidez = lerTurbidez();
+  float distancia = lerVazao();
+  
+  Serial.print("pH: ");
+  Serial.print(valor_pH);
+  Serial.print(" | Turbidez: ");
+  Serial.print(valor_turbidez);
+  Serial.print(" | Distancia do sensor ate a lamina de agua: ");
+  Serial.println(distancia);
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  delay(2000);
 }
