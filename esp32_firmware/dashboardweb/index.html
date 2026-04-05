@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualidade da Água - Meia Praia</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://cdn.rawgit.com/Mikhus/canvas-gauges/master/gauge.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-content">
+            <h1>Como está a água em Meia praia hoje?</h1>
+            <p id="data-atual"></p>
+        </div>
+    </header>
+    
+    <section class="resumo-dia">
+        <div class="card-pizza">
+            <h3>Qualidade Acumulada do Dia</h3>
+            <canvas id="graficoPizza"></canvas>
+        </div>
+        <div class="status-atual">
+            <div id="statusAlerta" class="normal">Sincronizando...</div>
+            <p class="ultima-coleta">Última coleta às: <span id="hora-coleta">--:--</span></p>
+        </div>
+    </section>
+
+    <h2 class="titulo-sessao">Medições em Tempo Real</h2>
+    <main class="container-velocimetros">
+        <div class="card">
+            <h3>pH</h3>
+            <canvas id="gauge-ph"></canvas>
+        </div>
+        <div class="card">
+            <h3>Turbidez (NTU)</h3>
+            <canvas id="gauge-turbidez"></canvas>
+        </div>
+        <div class="card">
+            <h3>Nível/Vazão (cm)</h3>
+            <canvas id="gauge-distancia"></canvas>
+            <div id="txtVazao" class="info-vazao">---</div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

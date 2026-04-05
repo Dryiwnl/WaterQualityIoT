@@ -1,0 +1,55 @@
+body { 
+    font-family: 'Segoe UI', sans-serif; 
+    background: #0f172a; color: #f8fafc; margin: 0; padding: 0; 
+}
+
+.main-header {
+    padding: 40px 5%;
+    background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+    text-align: left;
+}
+
+.main-header h1 { margin: 0; color: #38bdf8; font-size: 2.2rem; }
+#data-atual { color: #94a3b8; margin-top: 5px; text-transform: capitalize; }
+
+.resumo-dia {
+    display: flex; justify-content: space-around; align-items: center;
+    padding: 20px 5%; flex-wrap: wrap;
+}
+
+.card-pizza {
+    background: #1e293b; padding: 20px; border-radius: 20px;
+    width: 300px; text-align: center; border: 1px solid #334155;
+}
+
+.status-atual { text-align: center; min-width: 300px; }
+
+#statusAlerta {
+    padding: 30px; border-radius: 15px; font-size: 1.8rem;
+    font-weight: bold; margin-bottom: 10px; transition: 0.3s;
+}
+
+.normal { background: #065f46; color: #34d399; }
+.critico { background: #7f1d1d; color: #f87171; animation: pulse 1.5s infinite; }
+
+.ultima-coleta { color: #94a3b8; font-size: 1rem; }
+
+.titulo-sessao { padding-left: 5%; margin-top: 40px; color: #38bdf8; }
+
+.container-velocimetros {
+    display: flex; justify-content: center; gap: 20px;
+    padding: 20px 5% 50px; flex-wrap: wrap;
+}
+
+.card {
+    background: #1e293b; padding: 20px; border-radius: 20px;
+    border: 1px solid #334155; text-align: center;
+}
+
+.info-vazao { margin-top: 10px; font-weight: bold; color: #fbbf24; }
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
