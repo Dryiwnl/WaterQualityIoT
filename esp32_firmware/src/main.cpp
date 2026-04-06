@@ -4,9 +4,14 @@
 #include <HTTPClient.h>
 #include <WiFiClientSecure.h>
 
-// Credenciais da rede Wi-Fi virtual do Wokwi
+#define uS_TO_S_FACTOR 1000000ULL //
+//fator que converte microsegundos para segundos
+#define TIME_TO_SLEEP 3600 
+//TIME_TO_SLEEP são 3600s que é o equivalente a 1h
+
 const char* ssid = "Wokwi-GUEST";
 const char* password = "";
+// Credenciais da rede Wi-Fi virtual do Wokwi
 
 const String url_banco = "https://waterquality-iot-49505-default-rtdb.firebaseio.com/leituras.json";
 //usando um site para verificar se o código envia os dados via json
@@ -27,9 +32,6 @@ void setup() {
   Serial.println("IP: ");
   Serial.println(WiFi.localIP());
   Serial.println("Sistema Iniciado. Lendo sensores...");
-}
-
-void loop() {
 
   float valor_pH = lerPH();
   float valor_turbidez = lerTurbidez();
@@ -75,7 +77,7 @@ void loop() {
     json += "\"tem_vazao\":" + String(tem_vazao ? "true" : "false") + ",";
     json += "\"alerta_esgoto\":" + String(alerta_esgoto ? "true" : "false");
     json += "}";
-    //cria um json com ph, turbidez e distancia na forma
+    //cria um json com ph, turbidez e distancia
     int codigo = http.PUT(json);
     /*de fato envio o dado usando o post do json que eu acabei de criar. e esse post gera um 
     código que se for 200 significa que o dado foi enviado com sucesso, se não da algo -1 */
@@ -91,5 +93,16 @@ void loop() {
     http.end();
   }
 
-  delay(5000);
+  Serial.println("Entrando no modo deepSleep");
+  esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP*uS_TO_S_FACTOR);
+  Serial.flush();
+  esp_deep_sleep_start();
+  /*Configura o esp para ao final e toda a leitura e envio para o banco de dados entrar no modo deep
+  sleep por TIME_TO_SLEEP*uS_TO_S_FACTOR segundos, ou seja, após passar uma hora o timer acorda o esp*/
+  /*Por esse motivo toda a lógica do dispositivo está na parte de setup e não no loop, pq tod vez que 
+   o esp entra no modo deepsleep ele sofre um reset.*/
+}
+
+void loop() {
+
 }
